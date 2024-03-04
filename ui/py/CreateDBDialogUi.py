@@ -9,7 +9,7 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 
 
-class Ui_NewFileDialog(object):
+class Ui_NewFileDialog:
     def setupUi(self, NewFileDialog):
         NewFileDialog.setObjectName("NewFileDialog")
         NewFileDialog.resize(520, 262)

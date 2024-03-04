@@ -27,8 +27,6 @@ class NewEntryDialogCls(QMainWindow, Ui_addNewEntry):
         super(NewEntryDialogCls, self).__init__()
         self.obj = obj
         self.setupUi(self)
-        
-        
 
         self.add_actions()
 

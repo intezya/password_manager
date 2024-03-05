@@ -19,20 +19,20 @@ class OpenDialogCls(QMainWindow, Ui_DialogUI):
 
             con = create_con(file_path, master_key)
             if not con:
-                pass # TODO need to display error ui
+                print('not connected')
+                pass  # TODO need to display error ui
 
             self.obj.con = con
             self.close()
 
-        except:
-            pass # TODO: need to display error ui
+            self.obj.DisplayDB(con)
 
-
-
-
+        except Exception as e:
+            print(e)  # TODO: need to display error ui
 
     def cancelButton_clicked(self):
         self.close()
 
     def add_actions(self):
         self.cancelButton.clicked.connect(self.cancelButton_clicked)
+        self.okButton.clicked.connect(self.enterButton_clicked)

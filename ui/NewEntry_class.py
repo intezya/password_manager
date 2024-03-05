@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import QMainWindow
-from ui.py.MainWindowUi import Ui_addNewEntry
+from ui.py.NewEntryUi import Ui_addNewEntry
 
 
 def GetAndClearFields(self: object) -> dict[str, str]:
@@ -34,7 +34,10 @@ class NewEntryDialogCls(QMainWindow, Ui_addNewEntry):
         self.close()
 
     def addButton_action(self):
-        pass
+        info = GetAndClearFields(self)
+        print(info)
+        self.close()
 
     def add_actions(self):
-        pass
+        self.cancelButton.clicked.connect(self.cancelButton_action)
+        self.addButton.clicked.connect(self.addButton_action)

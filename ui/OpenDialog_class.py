@@ -3,6 +3,7 @@ from PyQt6.QtWidgets import QMainWindow
 
 from db import create_con
 
+from ui.utils import DisplayDB
 
 class OpenDialogCls(QMainWindow, Ui_DialogUI):
     def __init__(self, obj: object):
@@ -25,7 +26,7 @@ class OpenDialogCls(QMainWindow, Ui_DialogUI):
             self.obj.con = con
             self.close()
 
-            self.obj.DisplayDB(con)
+            DisplayDB(self.obj)
 
         except Exception as e:
             print(e)  # TODO: need to display error ui

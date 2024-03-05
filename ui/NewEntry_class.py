@@ -1,6 +1,7 @@
 from PyQt6.QtWidgets import QMainWindow
 from ui.py.NewEntryUi import Ui_addNewEntry
 
+from db import AddEntry
 
 def GetAndClearFields(self: object) -> dict[str, str]:
     title = self.titleLine.text()
@@ -36,6 +37,8 @@ class NewEntryDialogCls(QMainWindow, Ui_addNewEntry):
     def addButton_action(self):
         info = GetAndClearFields(self)
         print(info)
+        AddEntry(self.obj, info)
+
         self.close()
 
     def add_actions(self):

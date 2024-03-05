@@ -53,8 +53,6 @@ class MainWindowCls(QMainWindow, Ui_MainWindow):
         self.newEntryDialog = NewEntryDialogCls(self)
         self.newEntryDialog.show()
 
-
-
     def DisplayDB(self, con):
         # Comes from OpenFileButton_clicked
         print(con)

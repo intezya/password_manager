@@ -27,7 +27,7 @@ def create_table(con, password):
 
 
 def create_con(db_path, password) -> sqlite3.connect:
-    password = sha256(password.encode()).hexdigest()
+    password =
 
     con = sqlite3.connect(db_path)
 

@@ -12,7 +12,7 @@ from PyQt6.QtWidgets import QMainWindow
 class MainWindowCls(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super(MainWindowCls, self).__init__()
-
+        self.opened = False
         self.con = None
 
         self.setupUi(self)
@@ -43,11 +43,11 @@ class MainWindowCls(QMainWindow, Ui_MainWindow):
         self.newFileDialog.show()
 
     def SaveFileButton_clicked(self):
-        # TODO: need to realise DB opened requirement
-        print('saved')
-        SaveDB(self)
+        if self.opened:
+            print('saved') # TODO: delete this line
+            SaveDB(self)
 
     def addButton_clicked(self):
-        # TODO: need to realise DB opened requirement
-        self.newEntryDialog = NewEntryDialogCls(self)
-        self.newEntryDialog.show()
+        if self.opened:
+            self.newEntryDialog = NewEntryDialogCls(self)
+            self.newEntryDialog.show()

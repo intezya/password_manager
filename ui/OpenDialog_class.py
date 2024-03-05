@@ -24,6 +24,7 @@ class OpenDialogCls(QMainWindow, Ui_DialogUI):
                 pass  # TODO need to display error ui
 
             self.obj.con = con
+            self.obj.opened = True
             self.close()
 
             DisplayDB(self.obj)

@@ -36,7 +36,6 @@ def DisplayDB(self: object) -> None:
 
 
 def SaveDB(self: object) -> None:
-    # TODO: realise saving DB
     values = []
     data = []
 

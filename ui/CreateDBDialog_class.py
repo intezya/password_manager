@@ -12,8 +12,6 @@ class NewFileDialogCls(QMainWindow, Ui_NewFileDialog):
 
         self.add_actions()
 
-
-
     def cancelButton_action(self):
         self.close()
 

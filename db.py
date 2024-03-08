@@ -10,22 +10,23 @@ def create_table(con: sqlite3.Connection,
                  password: str) -> None:
     password = sha256(password.encode()).hexdigest()
 
-    with con.cursor() as cur:
-        cur.execute(
-            """CREATE TABLE IF NOT EXISTS master_key
-             (password text)""")
+    cur = con.cursor()
 
-        cur.execute(
-            """CREATE TABLE IF NOT EXISTS passwords
-             (title text,
-              username text,
-              password text,
-              link text,
-              notes text)""")
+    cur.execute(
+        """CREATE TABLE IF NOT EXISTS master_key
+         (password text)""")
 
-        cur.execute(
-            """INSERT INTO master_key
-             VALUES (?)""", (password,))
+    cur.execute(
+        """CREATE TABLE IF NOT EXISTS passwords
+         (title text,
+          username text,
+          password text,
+          link text,
+          notes text)""")
+
+    cur.execute(
+        """INSERT INTO master_key
+         VALUES (?)""", (password,))
 
     con.commit()
 
@@ -59,31 +60,27 @@ def getAllInfo(self: object) \
 
 def AddEntry(self: object,
              data: dict[str, str]) -> None:
-    try:
         # Comes from addButton_clicked
-        print(self.con)
 
-        cur = self.con.cursor()
+    cur = self.con.cursor()
 
-        cur.execute(
-            """INSERT INTO passwords
-             VALUES (?, ?, ?, ?, ?)""",
-            (data["title"],
-             data["username"],
-             data["password"],
-             data["link"],
-             data["notes"]))
+    cur.execute(
+        """INSERT INTO passwords
+         VALUES (?, ?, ?, ?, ?)""",
+        (data["title"],
+         data["username"],
+         data["password"],
+         data["link"],
+         data["notes"]))
 
-        row_position = self.tableWidget.rowCount()
-        self.tableWidget.insertRow(row_position)
+    row_position = self.tableWidget.rowCount()
+    self.tableWidget.insertRow(row_position)
 
-        col = 0
-        for key, value in data.items():
-            item = QTableWidgetItem(str(value))
-            self.tableWidget.setItem(row_position, col, item)
-            col += 1
-    except Exception as e:
-        print(e)
+    col = 0
+    for key, value in data.items():
+        item = QTableWidgetItem(str(value))
+        self.tableWidget.setItem(row_position, col, item)
+        col += 1
 
 
 def clearDB(self: object) -> None:

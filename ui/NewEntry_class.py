@@ -36,7 +36,9 @@ class NewEntryDialogCls(QMainWindow, Ui_addNewEntry):
 
     def addButton_action(self):
         info = GetAndClearFields(self)
-        print(info)
+
+        print(f'[DEBUG] Info added: {info}')
+
         AddEntry(self.obj, info)
 
         self.close()

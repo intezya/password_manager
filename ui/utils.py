@@ -22,10 +22,11 @@ def OpenFile(self):
 def DisplayDB(self: object) -> None:
     # Comes from OpenFileButton_clicked
 
-    print(self.con)
-
     data = getAllInfo(self)
-    print(data)
+
+    if not data:
+        return
+
     self.tableWidget.setRowCount(len(data))
     self.tableWidget.setColumnCount(len(data[0]))
 
@@ -47,15 +48,17 @@ def SaveDB(self: object) -> None:
                 value = item.text()
             except Exception:
                 value = ""
+
             values.append(value)
-            # print(values)
+
             if len(values) == 5:
                 data.append([item for item in values])
                 values = []
     try:
         if data:
             writeDB(self, data)
-        else: print(unluck)
+        else:
+            print('[DEBUG] Not saved! Search reason in utils.py')  # print('[DEBUG] No data to save!')
     except Exception as e:
         print(e)
 

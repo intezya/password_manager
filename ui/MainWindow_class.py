@@ -12,6 +12,10 @@ from PyQt6.QtWidgets import QMainWindow
 class MainWindowCls(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super(MainWindowCls, self).__init__()
+        self.openDialog = None
+        self.newFileDialog = None
+        self.newEntryDialog = None
+
         self.opened = False
         self.con = None
 
@@ -26,17 +30,25 @@ class MainWindowCls(QMainWindow, Ui_MainWindow):
 
     def OpenFileButton_clicked(self):
         file_path = OpenFile(self)
-        print(file_path)  # TODO: delete this line
 
-        if file_path != '':
-            self.openDialog = OpenDialogCls(self)
-            self.openDialog.pathLine.setText(file_path)
+        if file_path == '':
+            return
 
-            self.openDialog.show()
+        print(f'[DEBUG] Opened: {file_path}') # TODO: delete this line later
+        self.opened = True
+
+        self.openDialog = OpenDialogCls(self)
+        self.openDialog.pathLine.setText(file_path)
+
+        self.openDialog.show()
 
     def NewFileButton_clicked(self):
         file_path = CreateNewFile(self)
-        print(file_path)  # TODO: delete this line
+
+        if file_path == '':
+            return
+
+        print(f'[DEBUG] Created: {file_path}')  # TODO: delete this line later
 
         self.newFileDialog = NewFileDialogCls(self)
         self.newFileDialog.pathLine.setText(file_path)
@@ -44,7 +56,7 @@ class MainWindowCls(QMainWindow, Ui_MainWindow):
 
     def SaveFileButton_clicked(self):
         if self.opened:
-            print('saved') # TODO: delete this line
+            print('[DEBUG] Successfully saved!') # TODO: delete this line
             SaveDB(self)
 
     def addButton_clicked(self):

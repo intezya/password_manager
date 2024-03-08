@@ -9,28 +9,26 @@ class OpenDialogCls(QMainWindow, Ui_DialogUI):
     def __init__(self, obj: object):
         super(OpenDialogCls, self).__init__()
         self.obj = obj
+
         self.setupUi(self)
 
         self.add_actions()
 
     def enterButton_clicked(self):
-        try:
-            master_key = self.passwordLine.text()
-            file_path = self.pathLine.text()
+        master_key = self.passwordLine.text()
+        file_path = self.pathLine.text()
 
-            con = create_con(file_path, master_key)
-            if not con:
-                print('not connected')
-                pass  # TODO need to display error ui
+        con = create_con(file_path, master_key)
 
-            self.obj.con = con
-            self.obj.opened = True
-            self.close()
+        if not con:
+            print('[DEBUG] Wrong password or unsupported DB!')
+            return  # TODO need to display error ui
 
-            DisplayDB(self.obj)
+        self.obj.con = con
 
-        except Exception as e:
-            print(e)  # TODO: need to display error ui
+        self.close()
+
+        DisplayDB(self.obj)
 
     def cancelButton_clicked(self):
         self.close()
